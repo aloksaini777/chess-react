@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Chessboard from 'chessboardjsx';
 import { getGameWinner, isBlackTurn, isGameOver, isMoveable, isWhiteTurn, move as makeMove, newGame as newGameFen } from '../utils/chess';
-import bots from '../bots/bots';
+import bots, { difficultyLevels } from '../bots/bots';
 
 
 const ChessTest = () => {
@@ -11,6 +11,12 @@ const ChessTest = () => {
     const [blackBot, setBlackBot] = useState({ name: 'nmrugg/stockfish (l:1,d:10)', move: bots['nmrugg/stockfish (l:1,d:10)']() });
     const [history, setHistory] = useState([]);
 
+    const diffLevels = Object.entries(difficultyLevels).map(([key]) => key);
+    console.log('diffLevels: ', diffLevels);
+
+    useEffect(() => {
+        console.log('isPlaying: ', isPlaying);
+    }, [isPlaying]);
 
     const newGame = () => {
         setPlaying(false);
@@ -50,6 +56,11 @@ const ChessTest = () => {
         const isWhiteBotTurn = whiteBot && isWhiteTurn(fen);
         const isBlackBotTurn = blackBot && isBlackTurn(fen);
 
+        console.log('isPlaying: ', isPlaying);
+        console.log('isMoveable: ', isMoveable(fen, from));
+        console.log('isWhiteBotTurn: ', isWhiteBotTurn);
+        console.log('isBlackBotTurn: ', isBlackBotTurn);
+
         return isPlaying && isMoveable(fen, from) && !(isWhiteBotTurn || isBlackBotTurn);
     };
 
@@ -86,7 +97,11 @@ const ChessTest = () => {
     return(
         <div>
             <h1>Chess</h1>
-            <Chessboard position={fen} allowDrag={onDragStart} onDrop={onMovePiece} />
+            <Chessboard 
+                position={fen} 
+                allowDrag={onDragStart} 
+                onDrop={onMovePiece}
+            />
         </div>
 
     )
