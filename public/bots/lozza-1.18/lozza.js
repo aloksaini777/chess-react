@@ -1,4 +1,3 @@
-
 // http://op12no2.me/toys/lozza
 
 var BUILD = "1.18";

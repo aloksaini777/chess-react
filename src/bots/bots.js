@@ -62,5 +62,48 @@ const Bots = {
         'go movetime 1000',
     ]),
 };
-
 export default Bots;
+
+export const difficultyLevels = {
+    Noob: {
+        label: 'Noob',
+        description: 'For beginners learning the ropes.',
+        level: uciWorker('bots/stockfish.js-10.0.2/stockfish.js', [
+            'setoption name Skill Level value 1',
+            'go depth 5'
+        ]),
+    },
+    Casual: {
+        label: 'Casual',
+        description: 'A relaxed challenge.',
+        level: uciWorker('bots/stockfish.js-10.0.2/stockfish.js', [
+            'setoption name Skill Level value 5',
+            'go depth 10'
+        ]),
+    },
+    Pro: {
+        label: 'Pro',
+        description: 'A strong opponent awaits.',
+        level: uciWorker('bots/stockfish.js-10.0.2/stockfish.js', [
+            'setoption name Skill Level value 15',
+            'go depth 15'
+        ]),
+    },
+    Warrior: {
+        label: 'Warrior',
+        description: 'Fast and brutal.',
+        level: uciWorker('bots/stockfish.js-10.0.2/stockfish.js', [
+            'setoption name Skill Level value 20',
+            'go movetime 1000' // 1 second move
+        ]),
+    },
+    Grandmaster: {
+        label: 'Grandmaster',
+        description: 'Maximum difficulty, full power!',
+        level: uciWorker('bots/stockfish.js-10.0.2/stockfish.js', [
+            'setoption name Skill Level value 20',
+            'go depth 20'
+        ]),
+    },
+
+};
