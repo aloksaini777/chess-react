@@ -7,10 +7,12 @@ import BlackPiece from '../../assets/chess-pieces/bp.png';
 import { useSelector, useDispatch } from "react-redux";
 import { setNewGameLevel, setNewGamePlayer } from "../../features/newGame/newGameSlice";
 import { difficultyLevels } from "../../bots/bots";
+import { useNavigate } from "react-router-dom";
 
 
 
 const MenuPage = () => {
+    const navigate = useNavigate();
     const [menuVisible, setMenuVisible] = useState(false);
     const [slider, setSlider] = useState(false);
     const menuRef = useRef(null);
@@ -55,7 +57,7 @@ const MenuPage = () => {
             },
             "<" // run simultaneously with the menu slide out
         );
-      };
+    };
 
 
     return (
@@ -172,7 +174,7 @@ const MenuPage = () => {
                             <button 
                                 id="open-char" 
                                 className="m-button"
-                                onClick={()=>{handleNewGame();}}
+                                onClick={()=>{navigate('/game-page');}}
                             >
                                 <p className="button-text">Let's Play</p>
                             </button>
